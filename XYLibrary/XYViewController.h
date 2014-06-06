@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XYViewController : UIViewController
+@interface XYViewController : UIViewController<UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @end

@@ -30,6 +30,8 @@
 
 @property (nonatomic, strong) UITableView *tableView;
 
+@property (nonatomic, assign) BOOL isLoading;
+
 @end
 
 @implementation XYSearchViewController
@@ -104,12 +106,13 @@
     __weak XYSearchViewController *weakSelf = self;
     
     XYConnection *connection = [XYConnection connectionWithRequest:request progressBlock:nil completionBlock:^(XYConnection *connection, NSError *error) {
-        
+        weakSelf.isLoading = NO;
         [activityIndicatorView stopAnimating];
         [activityIndicatorView removeFromSuperview];
         if (error) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"网络不稳定" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
             [alert show];
+            weakSelf.currentPage--;
             return;
         }
         NSString *string = [[NSString alloc] initWithData:connection.downloadData encoding:NSUTF8StringEncoding];
@@ -121,6 +124,7 @@
             if ([key isEqualToString:string]) {
                 [alert setMessage:[weakSelf.errorDict objectForKey:key]];
                 [alert show];
+                weakSelf.currentPage--;
                 return;
             }
         }
@@ -131,11 +135,13 @@
         if (requestBooks.count > 0) {
             [weakSelf.books addObjectsFromArray:requestBooks];
             [weakSelf.tableView reloadData];
-            if ([weakSelf.tableView visibleCells].count) {
+            if ([weakSelf.tableView visibleCells].count && weakSelf.books.count <= 20) {
                 [weakSelf.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
             }
         }else{
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"没有更多了" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            weakSelf.currentPage--;
+
             [alert show];
         }
     }];
@@ -189,5 +195,15 @@
 {
     XYSimpleTableViewCell *cell = (XYSimpleTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
     return cell.frame.size.height;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == (self.books.count - 1) && !self.isLoading) {
+        self.currentPage ++;
+        self.isLoading = YES;
+        [self searchStart];
+        
+    }
 }
 @end

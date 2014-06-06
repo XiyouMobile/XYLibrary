@@ -70,12 +70,14 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (nil == cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+
     }
     NSDictionary *dict = [self.books objectAtIndex:indexPath.row];
-    cell.textLabel.text = [dict objectForKey:@"bookName"];
     cell.textLabel.numberOfLines = 0;
     cell.textLabel.font = [UIFont boldSystemFontOfSize:20];
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    cell.textLabel.text = [dict objectForKey:@"bookName"];
+    
     cell.detailTextLabel.text = [NSString stringWithFormat:@"索书号：%@",[dict objectForKey:@"bookNum"]];
     cell.detailTextLabel.font = [UIFont systemFontOfSize:18];
     return cell;

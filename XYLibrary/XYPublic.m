@@ -110,6 +110,14 @@
     [histroyArr writeToFile:[[XYPublic documentsDirectory] stringByAppendingPathComponent:@"searchHistory.plist"] atomically:YES];
 }
 
++ (void)clearHistory
+{
+    NSString *historyFilePath = [[XYPublic documentsDirectory] stringByAppendingPathComponent:@"searchHistory.plist"];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:historyFilePath]) {
+        [[NSFileManager defaultManager] removeItemAtPath:historyFilePath error:NULL];
+    }
+}
+
 + (NSArray *)borrowBooks
 {
     NSArray *books = [[NSArray alloc] initWithContentsOfFile:[[XYPublic documentsDirectory] stringByAppendingPathComponent:@"borrowBooks.plist"]];

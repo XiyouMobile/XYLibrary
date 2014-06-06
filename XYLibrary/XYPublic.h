@@ -34,6 +34,7 @@
 //Store Data
 + (NSMutableArray *)historyArr;
 + (void)storeHistoryArr:(NSArray *)histroyArr;
++ (void)clearHistory;
 
 + (NSArray *)borrowBooks;
 + (void)storeBorrowBooks:(NSArray *)borrowBooks;

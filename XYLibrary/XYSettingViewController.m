@@ -10,6 +10,10 @@
 
 #import "XYSearchCondition.h"
 
+#import "XYPublic.h"
+
+#import "XYAboutViewController.h"
+
 @interface XYSettingViewController ()
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -57,7 +61,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -66,6 +70,8 @@
         return 1;
     }else if (1 == section){
         return self.searchArr.count + self.insertFlag;
+    }else if (2 == section){
+        return 2;
     }
     return 0;
 }
@@ -101,6 +107,10 @@
             cell.textLabel.text = [self.searchArr objectAtIndex:indexPath.row];
             cell.detailTextLabel.text = [[[self.conditionArr objectAtIndex:indexPath.row] firstObject] objectAtIndex:[XYSearchCondition getSearchConditionValueWithIndex:indexPath.row]];
         }
+    }else if (2 == indexPath.section){
+        NSArray *temArr = @[@"关于开发者", @"去AppStore评分"];
+        cell.textLabel.text = [temArr objectAtIndex:indexPath.row];
+        cell.detailTextLabel.text = @"";
     }
     
     return cell;
@@ -141,7 +151,7 @@
         [self.tableView deleteRowsAtIndexPaths:@[temIndexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
     
-    if (0 != indexPath.section && ![selectedIndexPath isEqual:indexPath]){
+    if (0 != indexPath.section && 2 != indexPath.section && ![selectedIndexPath isEqual:indexPath]){
         self.insertFlag = 1;
         if (selectedIndexPath && selectedIndexPath.row < indexPath.row) {
             self.indexPath = [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:indexPath.section];
@@ -153,6 +163,23 @@
         [self.tableView insertRowsAtIndexPaths:@[temIndexPath] withRowAnimation:UITableViewRowAnimationFade];
         
         [self.tableView scrollToRowAtIndexPath:temIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+    }
+    
+    //处理其他section的点击事件
+    
+    if (0 == indexPath.section && 0 == indexPath.row) {
+        [XYPublic clearHistory];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"搜索记录已清除" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
+    
+    if (2 == indexPath.section) {
+        if (0 == indexPath.row) {
+            XYAboutViewController *aboutViewController = [[XYAboutViewController alloc] init];
+            [self.navigationController pushViewController:aboutViewController animated:YES];
+        }
     }
     
 }

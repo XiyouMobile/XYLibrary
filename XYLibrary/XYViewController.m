@@ -47,10 +47,19 @@
     
     //头像
     self.headImageView = [[UIImageView alloc] initWithFrame:CGRectMake(40, offset, 94, 94)];
+    self.headImageView.userInteractionEnabled = YES;
     self.headImageView.layer.borderWidth = 3.0f;
     self.headImageView.layer.borderColor = [UIColor whiteColor].CGColor;
-    self.headImageView.image = [UIImage imageNamed:@"holdplace"];
+    UIImage *headImage = [UIImage imageWithContentsOfFile:[NSHomeDirectory() stringByAppendingString:@"/Documents/head.png"]];
+    if (nil == headImage) {
+        headImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"holdplace" ofType:@"png"]];
+    }
+    self.headImageView.image = headImage;
     [self.view addSubview:self.headImageView];
+    
+    //添加手势
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pickerHeadImage)];
+    [self.headImageView addGestureRecognizer:tap];
     
     //名字
     NSString *nameStr = [XYPublic userName];
@@ -157,6 +166,60 @@
 {
     XYSettingViewController *settingViewController = [[XYSettingViewController alloc] init];
     [self.navigationController pushViewController:settingViewController animated:YES];
+}
+
+- (void)pickerHeadImage
+{
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"选取照片" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"从图库中选择", @"拍照选取", nil];
+    [actionSheet showInView:self.view];
+}
+
+-(void) saveImage:(UIImage *)image withFileName:(NSString *)imageName ofType:(NSString *)extension inDirectory:(NSString *)directoryPath {
+    if ([[extension lowercaseString] isEqualToString:@"png"]) {
+        [UIImagePNGRepresentation(image) writeToFile:[directoryPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", imageName, @"png"]] options:NSAtomicWrite error:nil];
+    } else if ([[extension lowercaseString] isEqualToString:@"jpg"] || [[extension lowercaseString] isEqualToString:@"jpeg"]) {
+        [UIImageJPEGRepresentation(image, 1.0) writeToFile:[directoryPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", imageName, @"jpg"]] options:NSAtomicWrite error:nil];
+    } else {
+        //ALog(@"Image Save Failed\nExtension: (%@) is not recognized, use (PNG/JPG)", extension);
+        NSLog(@"文件后缀不认识");
+    }
+}
+
+#pragma mark - UIActionSheet Delegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.delegate = self;
+    imagePicker.allowsEditing = YES;
+    
+    if (0 == buttonIndex) {
+        //
+        if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum]) {
+            return;
+        }
+        imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        
+    }else if (1 == buttonIndex){
+        //
+        if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            return;
+        }
+        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    }
+    
+    [self presentViewController:imagePicker animated:YES completion:NULL];
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+    self.headImageView.image = image;
+    [self saveImage:image withFileName:@"head" ofType:@"png" inDirectory:[NSHomeDirectory() stringByAppendingString:@"/Documents"]];
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
 @end

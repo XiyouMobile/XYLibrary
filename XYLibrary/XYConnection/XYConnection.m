@@ -106,8 +106,6 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
-    
-    NSLog(@"Connection failed");
     if (self.completionBlock){
         self.completionBlock(self, error);
     }

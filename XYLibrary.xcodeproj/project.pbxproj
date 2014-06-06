@@ -73,6 +73,9 @@
 		83BBF55D19095C2600814A07 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 83BBF55719095C2600814A07 /* README.md */; };
 		83BBF55E19095C2600814A07 /* RefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BBF55919095C2600814A07 /* RefreshView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		83C46269190B5A0F0086ED57 /* XYSimpleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C46268190B5A0F0086ED57 /* XYSimpleTableViewCell.m */; };
+		83DF32CF1941562B00E39AF6 /* Default–568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83DF32CC1941562B00E39AF6 /* Default–568h@2x.png */; };
+		83DF32D01941562B00E39AF6 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 83DF32CD1941562B00E39AF6 /* Default.png */; };
+		83DF32D11941562B00E39AF6 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83DF32CE1941562B00E39AF6 /* Default@2x.png */; };
 		83FDACA819050522001D44BB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FDACA719050522001D44BB /* Foundation.framework */; };
 		83FDACAA19050522001D44BB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FDACA919050522001D44BB /* CoreGraphics.framework */; };
 		83FDACAC19050522001D44BB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FDACAB19050522001D44BB /* UIKit.framework */; };
@@ -186,6 +189,9 @@
 		83C46268190B5A0F0086ED57 /* XYSimpleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYSimpleTableViewCell.m; sourceTree = "<group>"; };
 		83DF32CA1941455E00E39AF6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		83DF32CB1941455E00E39AF6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		83DF32CC1941562B00E39AF6 /* Default–568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default–568h@2x.png"; sourceTree = "<group>"; };
+		83DF32CD1941562B00E39AF6 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		83DF32CE1941562B00E39AF6 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		83FDACA419050522001D44BB /* XYLibrary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XYLibrary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83FDACA719050522001D44BB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		83FDACA919050522001D44BB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -234,6 +240,9 @@
 		83586ABF193F51CB00F54334 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				83DF32CC1941562B00E39AF6 /* Default–568h@2x.png */,
+				83DF32CD1941562B00E39AF6 /* Default.png */,
+				83DF32CE1941562B00E39AF6 /* Default@2x.png */,
 				835ACC5E1940B475000E2118 /* about.png */,
 				835ACC5F1940B475000E2118 /* about@2x.png */,
 				83586AC0193F51FA00F54334 /* search.plist */,
@@ -547,6 +556,7 @@
 				836961B019055821005DB790 /* nav2.png in Resources */,
 				8369619819054573005DB790 /* background.png in Resources */,
 				8369618619053EDD005DB790 /* Icon-Small.png in Resources */,
+				83DF32D11941562B00E39AF6 /* Default@2x.png in Resources */,
 				8369619C19054573005DB790 /* collect.png in Resources */,
 				836961A419054580005DB790 /* holdplace.png in Resources */,
 				836961AF19055821005DB790 /* nav1@2x.png in Resources */,
@@ -557,8 +567,10 @@
 				83586AC1193F51FA00F54334 /* search.plist in Resources */,
 				83BBF55A19095C2600814A07 /* blueArrow.png in Resources */,
 				8369619F19054573005DB790 /* search@2x.png in Resources */,
+				83DF32D01941562B00E39AF6 /* Default.png in Resources */,
 				83FDACB219050522001D44BB /* InfoPlist.strings in Resources */,
 				8369618419053EDD005DB790 /* Icon-Small-40.png in Resources */,
+				83DF32CF1941562B00E39AF6 /* Default–568h@2x.png in Resources */,
 				837B5A2F1905FCBB00E9CB73 /* edit@2x.png in Resources */,
 				838EB7F0190CC006002D609A /* nav_share@2x.png in Resources */,
 				8369619D19054573005DB790 /* collect@2x.png in Resources */,
@@ -742,7 +754,6 @@
 		83FDACD719050522001D44BB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XYLibrary/XYLibrary-Prefix.pch";
 				INFOPLIST_FILE = "XYLibrary/XYLibrary-Info.plist";
@@ -755,7 +766,6 @@
 		83FDACD819050522001D44BB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XYLibrary/XYLibrary-Prefix.pch";
 				INFOPLIST_FILE = "XYLibrary/XYLibrary-Info.plist";

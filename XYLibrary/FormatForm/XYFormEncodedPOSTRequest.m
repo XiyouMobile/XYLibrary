@@ -37,7 +37,6 @@
         }
     }
     
-    NSLog(@"postBody is now %@", postBody);
     [self setHTTPBody:[postBody dataUsingEncoding:enc]];
 }
 

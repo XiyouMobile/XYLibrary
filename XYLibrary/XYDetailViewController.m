@@ -48,7 +48,7 @@
     
     [self requestBookDetail];
     
-    NSLog(@"%@", self.bookId);
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -96,7 +96,7 @@
         picker.body = [NSString stringWithFormat:@"书名:%@\n索书号:%@", self.bookName, self.bookNum];
         [self presentViewController:picker animated:YES completion:NULL];
     }else{
-        NSLog(@"cant");
+
     }
 }
 
@@ -199,7 +199,7 @@
         case MessageComposeResultSent:
             break;
         default:
-            NSLog(@"not send");
+
             break;
     }
     [self dismissViewControllerAnimated:YES completion:NULL];

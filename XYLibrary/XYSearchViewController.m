@@ -91,13 +91,13 @@
     for (NSUInteger i = 0; i < 6; i++) {
         [temDict setObject:[[[searchArr objectAtIndex:i] lastObject] objectAtIndex:[XYSearchCondition getSearchConditionValueWithIndex:i]] forKey:[keyArr objectAtIndex:i]];
     }
-    NSLog(@"%@", temDict);
+
     
     NSMutableDictionary *formDict = [[NSMutableDictionary alloc] initWithDictionary:temDict];
     [formDict setObject:self.keWord forKey:@"word"];
     [formDict setObject:[NSString stringWithFormat:@"%d",self.currentPage] forKey:@"page"];
     
-    NSLog(@"%@", formDict);
+
     
     //[NSDictionary dictionaryWithObjectsAndKeys:self.keWord, @"word", [NSString stringWithFormat:@"%d",self.currentPage], @"page", nil];
     NSString *searchURLString = @"http://222.24.63.109/lib/default.aspx";

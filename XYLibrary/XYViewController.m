@@ -133,7 +133,7 @@
         CGRect editButtonFrame = editButton.frame;
         editButtonFrame.origin.x = CGRectGetMaxX(label.frame);
         editButton.frame = editButtonFrame;
-        NSLog(@"%@", name);
+
         if (!button) {
             [self borrowButtonClicked:nil];
         }
@@ -181,7 +181,6 @@
         [UIImageJPEGRepresentation(image, 1.0) writeToFile:[directoryPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", imageName, @"jpg"]] options:NSAtomicWrite error:nil];
     } else {
         //ALog(@"Image Save Failed\nExtension: (%@) is not recognized, use (PNG/JPG)", extension);
-        NSLog(@"文件后缀不认识");
     }
 }
 
@@ -189,6 +188,10 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    
+    if (2 == buttonIndex) {
+        return;
+    }
     
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     imagePicker.delegate = self;
